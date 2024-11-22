@@ -8,13 +8,13 @@ interface TodoListProps {
 
 const TodoList: React.FC<TodoListProps> = ({ tasks }) => {
   return (
-    <div className='overflow-x-auto'>
-      <table className='table w-full'>
-        {/* head */}
+    <div className="overflow-x-auto">
+      <table className="table-auto w-full border-collapse">
+        {/* Encabezado */}
         <thead>
-          <tr>
-            <th>Tasks</th>
-            <th>Actions</th>
+          <tr className="bg-blue-800 text-white text-left">
+            <th className="px-4 py-3">Tasks</th>
+            <th className="px-4 py-3">Actions</th>
           </tr>
         </thead>
         <tbody>

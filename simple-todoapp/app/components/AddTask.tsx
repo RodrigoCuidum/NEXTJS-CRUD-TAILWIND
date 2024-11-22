@@ -2,26 +2,31 @@
 
 import Modal from "./Modal";
 import { AiOutlinePlus } from "react-icons/ai";
-import { FormEventHandler, useState } from "react";
+import { FormEventHandler, useReducer, useState } from "react";
 import { addTodo } from "../../api";
+import { useRouter } from "next/navigation";
+import { v4 as uuidv4 } from 'uuid'
 
 const AddTask = () => {
+  const router = useRouter()
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [newTaskValue, setNewTaskValue] = useState<string>('');
 
   const handleSubmitNewTodo: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
     await addTodo({
-      id:3,
+      id:uuidv4(),
       text: newTaskValue
     })
     setNewTaskValue("");
+    setModalOpen(false);
+    router.refresh()
   }
   return (
     <div>
       <button
         onClick={() => setModalOpen(true)}
-        className="btn btn-primary w-full"
+        className="btn btn-primary w-full font-black text-white bg-blue-800"
       >
         Añadir nueva tarea
         <AiOutlinePlus className="ml-1" size={18} />
@@ -38,7 +43,7 @@ const AddTask = () => {
               onChange={e => setNewTaskValue(e.target.value)}
               type="text"
               placeholder="Descripción"
-              className="input input-bordered input-primary w-full w-full"
+              className="input input-bordered input-primary w-full"
             />
             <button type="submit" className="btn bg-blue-600 text-white">
               Submit
